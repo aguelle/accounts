@@ -81,7 +81,7 @@ include_once './includes/_head.php'
                             <td width="50" class="ps-3">
                             </td>
                             <td>
-                                <time class="d-block fst-italic fw-light"> <?= $transaction['date_transaction'] ?> <? $transaction['name'] ?>
+                                <time class="d-block fst-italic fw-light"> <?= $transaction['date_transaction'] ?></time> <?= $transaction['name'] ?>
                             </td>
                             <td class="text-end">
                                 <span class="rounded-pill text-nowrap bg-warning-subtle px-2"><?= $transaction['amount'] ?>
