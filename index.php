@@ -8,7 +8,7 @@ include_once './includes/_head.php'
             <i class="bi bi-piggy-bank-fill text-primary fs-1"></i>
         </a>
         <nav class="col-11 col-md-7"> -->
-            <!-- <ul class="nav">
+<!-- <ul class="nav">
                 <li class="nav-item">
                     <a href="index.php" class="nav-link link-secondary" aria-current="page">Opérations</a>
                 </li>
@@ -22,7 +22,7 @@ include_once './includes/_head.php'
                     <a href="import.php" class="nav-link link-body-emphasis">Importer</a>
                 </li>
             </ul> -->
-        <!-- </nav>
+<!-- </nav>
         <form action="" class="col-12 col-md-4" role="search">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Rechercher..." aria-describedby="button-search">
@@ -40,13 +40,13 @@ include_once './includes/_head.php'
             <h2 class="my-0 fw-normal fs-4">Solde aujourd'hui</h2>
         </div>
         <div class="card-body">
-            <?php $query = $dbCo->prepare("SELECT SUM(`amount`) as solde
+            <?php $query = $dbCo->prepare("SELECT SUM(`amount`) AS `sold`
                 FROM `transaction`;");
             $query->execute();
             $result = $query->fetchall();
-            var_dump($result)
+            var_dump($result['0']);
             ?>
-            <p class="card-title pricing-card-title text-center fs-1"><?= $_GET[$result['solde']] ?></p>
+            <p class="card-title pricing-card-title text-center fs-1"><?= $result['0'] ?></p>
         </div>
     </section>
 
@@ -78,18 +78,18 @@ include_once './includes/_head.php'
                             <td width="50" class="ps-3">
                             </td>
                             <td>
-                                <time class="d-block fst-italic fw-light"> <? $transaction['date_transaction'] ?> <? $transaction['name'] ?>
+                                <time class="d-block fst-italic fw-light"> <?= $transaction['date_transaction'] ?> <? $transaction['name'] ?>
                             </td>
                             <td class="text-end">
-                                <span class="rounded-pill text-nowrap bg-warning-subtle px-2" text="<? $transaction['amount'] ?>">
+                                <span class="rounded-pill text-nowrap bg-warning-subtle px-2"><?= $transaction['amount'] ?>
 
                                 </span>
                             </td>
                             <td class="text-end text-nowrap">
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+                                <a href="action.php?action=edit&id=<?= $transaction['id_transaction'] ?>&token=<?= $_SESSION['token'] ?>" class="btn btn-outline-primary btn-sm rounded-circle">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
+                                <a href="action.php?action=delete&id=<?= $transaction['id_transaction'] ?>&token=<?= $_SESSION['token'] ?>" class="btn btn-outline-danger btn-sm rounded-circle">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
@@ -98,10 +98,10 @@ include_once './includes/_head.php'
                     <?php
                     } ?>
                     <td class="text-end text-nowrap">
-                        <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+                        <a href="action.php?action=edit&id=<?= $transaction['id_transaction'] ?>&token=<?= $_SESSION['token'] ?>" class="btn btn-outline-primary btn-sm rounded-circle">
                             <i class="bi bi-pencil"></i>
                         </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
+                        <a href="action.php?action=delete&id=<?= $transaction['id_transaction'] ?>&token=<?= $_SESSION['token'] ?>" class="btn btn-outline-danger btn-sm rounded-circle">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
