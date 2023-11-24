@@ -44,10 +44,13 @@ include_once './includes/_head.php'
                 FROM `transaction`;");
             $query->execute();
             $result = $query->fetchall();
-            var_dump($result['0']);
+            foreach ($result as $sold) {
+                
             ?>
-            <p class="card-title pricing-card-title text-center fs-1"><?= $result['0'] ?></p>
-        </div>
+            <p class="card-title pricing-card-title text-center fs-1"><?= $sold['sold'] ?></p>
+    <?php
+}
+?>    </div>
     </section>
 
     <section class="card mb-4 rounded-3 shadow-sm">
