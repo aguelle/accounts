@@ -15,7 +15,7 @@ function generateToken()
 {
     if (!isset($_SESSION['token']) || time() > $_SESSION['tokenExpire']) {
         $_SESSION['token'] = md5(uniqid(mt_rand(), true));
-        $_SESSION['tokenExpire'] = time() + 5 * 60;
+        $_SESSION['tokenExpire'] = time() + 20 * 60;
     }
 }
 
@@ -87,48 +87,11 @@ function checkXSS(array &$array): void
 // TASK MANAGEMENT
 // ---------------------
 
-/**
- * Get the priority value for a new task.
- *
- * @return integer|null
- */
-function getNewPriority(): ?int
-{
-    global $dbCo;
 
-    $query = $dbCo->prepare("SELECT IFNULL(MAX(priority), 0) + 1 AS new_priority FROM task;");
-    $isOk = $query->execute();
-    return $isOk ? $query->fetchColumn() : null;
-}
 
-/**
- * Get the priority of the given task
- *
- * @param integer $idTask Id of the task
- * @return integer priority value
- */
-function getPriority(int $idTask): int
-{
-    global $dbCo;
 
-    $query = $dbCo->prepare("SELECT priority FROM task WHERE id_task = :id;");
-    $query->execute(['id' => $idTask]);
-    return $query->fetchColumn();
-}
 
-/**
- * Move up the priority value of all task above the given priority value
- *
- * @param integer $minPriority
- * @return boolean
- */
-function moveUpPriorityAbove(int $minPriority): bool
-{
-    global $dbCo;
 
-    $query = $dbCo->prepare("UPDATE task SET priority = priority - 1 WHERE priority > :priority;");
-    return $query->execute(['priority' => $minPriority]);
-}
 
 /**
  * Add an error to display and stop script

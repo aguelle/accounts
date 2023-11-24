@@ -36,7 +36,7 @@ if ($data['action'] === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $isQueryOk = $query->execute([
         'name' => $data['name'],
         'amount' => $data['amount'],
-        'date_transaction' => $data['date']
+        'date_transaction' => $data['date_transaction']
         
     ]);
 

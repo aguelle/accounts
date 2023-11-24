@@ -4,7 +4,7 @@ require_once 'includes/_functions.php';
 
 if (!isset($_REQUEST['action'])) addErrorAndExit('Aucune action');
 
-include 'includes/_db.php';
+include 'includes/_dbCo.php';
 
 // Start user session
 session_start();
@@ -22,8 +22,7 @@ if (is_int($id)) {
     try {
         $dbCo->beginTransaction();
 
-        // Get priority value from the selected task.
-        // $priority = getPriority($id);
+
 
         // Delete the selected task.
         $queryUpdate = $dbCo->prepare("DELETE FROM transaction WHERE id_transaction = :id;");
@@ -33,8 +32,7 @@ if (is_int($id)) {
             throw new Exception('Nombre incohérent de lignes affectées par la suppression.');
         }
         
-        // Update priorities
-        // moveUpPriorityAbove($priority);
+  
 
         if ($dbCo->commit()) {
             $_SESSION['notif'] = 'Tâche supprimée avec succès.';
