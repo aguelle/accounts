@@ -88,11 +88,6 @@ function checkXSS(array &$array): void
 // ---------------------
 
 
-
-
-
-
-
 /**
  * Add an error to display and stop script
  * 
